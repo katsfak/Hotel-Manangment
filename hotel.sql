@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1
--- Χρόνος δημιουργίας: 29 Αυγ 2023 στις 16:30:24
+-- Χρόνος δημιουργίας: 10 Οκτ 2023 στις 14:57:04
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -34,14 +34,6 @@ CREATE TABLE `payments` (
   `CardNumber` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Άδειασμα δεδομένων του πίνακα `payments`
---
-
-INSERT INTO `payments` (`PaymentID`, `ReservationID`, `PaymentMethod`, `CardNumber`) VALUES
-(23, 28, 'ΚΑΡΤΑ', '123456789'),
-(24, 29, 'ΜΕΤΡΗΤΑ', '');
-
 -- --------------------------------------------------------
 
 --
@@ -55,14 +47,6 @@ CREATE TABLE `reservations` (
   `CheckInDate` date NOT NULL,
   `CheckOutDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Άδειασμα δεδομένων του πίνακα `reservations`
---
-
-INSERT INTO `reservations` (`ReservationID`, `UserID`, `RoomNumber`, `CheckInDate`, `CheckOutDate`) VALUES
-(28, 1, '104', '2023-08-25', '2023-08-25'),
-(29, 3, '106', '2023-08-25', '2023-08-27');
 
 -- --------------------------------------------------------
 
@@ -85,7 +69,7 @@ CREATE TABLE `rooms` (
 
 INSERT INTO `rooms` (`RoomNumber`, `RoomType`, `Capacity`, `PricePerNight`, `Availability`, `FloorNumber`) VALUES
 ('103', 'Δίκλινο', 2, 200.00, 1, 2),
-('104', 'Μονόκλινο', 1, 100.00, 1, 1),
+('104', 'Μονόκλινο', 1, 100.00, 0, 1),
 ('106', 'Μονόκλινο', 1, 12.00, 1, 310),
 ('107', 'Οικογενειακό δωμάτιο', 4, 300.00, 1, 3),
 ('108', 'Σουΐτα', 8, 400.00, 1, 4);
@@ -115,10 +99,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `NAME`, `EMAIL`, `PHONE`, `ADDRESS`, `USERNAME`, `PASSWORD`, `CATEGORY`, `GENDER`, `NATIONALITY`, `BIRTHDAY`) VALUES
-(1, 'Κατερίνα Σφακιανού', 'katsfak10@gmail.com', '2107784592', 'Α. Παναγούλη 23', 'katsfak', 'aaa12345', 'CUSTOMER', 'Θηλυκό', 'Ελληνική', '2002-11-16'),
 (2, 'admin', 'Adminhotel@gmail.com', NULL, NULL, 'admin', 'admin', 'ADMIN', NULL, NULL, NULL),
-(3, 'Γρηγόρης Σφακιανός', 'gregory12@gmail.com', '6969696969', 'Νέα Μάκρη', 'greg', '12345', 'CUSTOMER', 'Αρσενικό', 'Ελληνική', '2002-11-18'),
-(5, 'Παναγιώτης', 'pansfak@gmail.com', '2107784592', 'Α.Παναγούλη 23', 'pan', '12345', 'CUSTOMER', 'Αρσενικό', 'Ελληνική', '1997-08-01');
+(6, 'test', 'testuser@email.com', '6984374255', 'Χρυσοστόμου 50', 'testuser', '12345', 'CUSTOMER', 'Αρσενικό', 'Ελληνική', '1998-05-14');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -159,19 +141,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT για πίνακα `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT για πίνακα `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `ReservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `ReservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT για πίνακα `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Περιορισμοί για άχρηστους πίνακες
@@ -194,7 +176,7 @@ DELIMITER $$
 --
 -- Συμβάντα
 --
-CREATE DEFINER=`root`@`localhost` EVENT `update_room_availability` ON SCHEDULE EVERY 1 DAY STARTS '2023-08-29 17:27:04' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE rooms SET Availability = true WHERE RoomNumber IN (SELECT RoomNumber FROM reservations WHERE CheckOutDate < CURDATE())$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_room_availability` ON SCHEDULE EVERY 1 DAY STARTS '2023-08-30 01:30:25' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE rooms SET Availability = true WHERE RoomNumber IN (SELECT RoomNumber FROM reservations WHERE CheckOutDate < CURDATE())$$
 
 DELIMITER ;
 COMMIT;
