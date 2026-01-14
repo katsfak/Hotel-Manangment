@@ -2,10 +2,6 @@
 
 A comprehensive hotel management system built with Java and SQL for managing room reservations, user accounts, payments, and hotel operations.
 
-[![Made with Java](https://img.shields.io/badge/Made%20with-Java-red. svg)](https://www.java.com/)
-[![Database](https://img.shields.io/badge/Database-MySQL-blue.svg)](https://www.mysql.com/)
-[![IDE](https://img.shields.io/badge/IDE-Apache%20NetBeans-green.svg)](https://netbeans.apache.org/)
-
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -294,30 +290,6 @@ Contributions are welcome! Here's how you can help:
 4. **Push** to the branch (`git push origin feature/AmazingFeature`)
 5. **Open** a Pull Request
 
-### Development Guidelines
-
-- Follow Java coding conventions
-- Comment your code appropriately
-- Test thoroughly before submitting
-- Update documentation as needed
-
-## 🐛 Known Issues
-
-- Room 106 has an unusual floor number (310) - may need correction
-- Password storage should use hashing (currently plain text)
-- Consider implementing input validation for security
-
-## 🔮 Future Enhancements
-
-- [ ] Password encryption/hashing
-- [ ] Email notifications for bookings
-- [ ] Online payment gateway integration
-- [ ] Advanced reporting and analytics
-- [ ] Mobile application
-- [ ] Multi-language support
-- [ ] Room service management
-- [ ] Employee management module
-
 ## 📄 License
 
 This project is available for educational and personal use. Please contact the repository owner for commercial use permissions.
@@ -326,13 +298,3 @@ This project is available for educational and personal use. Please contact the r
 
 **katsfak**
 - GitHub: [@katsfak](https://github.com/katsfak)
-
-## 📞 Support
-
-For support, please open an issue in the GitHub repository or contact the administrator.
-
----
-
-**Created with ❤️ using Java and MySQL**
-
-**Last Updated**:  October 2023
